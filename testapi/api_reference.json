@@ -1,0 +1,203 @@
+{
+    "title": "Python API 使用文档 | Python API Documentation",
+    "version": "1.0.0",
+    "libraries": {
+        "openai": {
+            "description": "OpenAI官方Python库 | OpenAI Official Python Library",
+            "installation": "pip install openai",
+            "features": {
+                "chat": {
+                    "description": "聊天功能 | Chat Function",
+                    "code_example": {
+                        "imports": "from openai import OpenAI",
+                        "setup": [
+                            "client = OpenAI(",
+                            "    base_url='https://api.nuwaapi.com/v1',",
+                            "    api_key='sk-xxx'  # Replace with your key"
+                        ],
+                        "usage": [
+                            "completion = client.chat.completions.create(",
+                            "    model=\"gpt-4o\",",
+                            "    messages=[",
+                            "        {\"role\": \"system\", \"content\": \"You are a helpful assistant.\"},",
+                            "        {\"role\": \"user\", \"content\": \"Hello!\"}",
+                            "    ]",
+                            ")",
+                            "print(completion.choices[0].message)"
+                        ]
+                    }
+                },
+                "chat_with_image": {
+                    "description": "图片识别功能 | Image Recognition Function",
+                    "code_example": {
+                        "imports": "from openai import OpenAI",
+                        "usage": [
+                            "response = client.chat.completions.create(",
+                            "    model=\"gpt-4o\",",
+                            "    messages=[",
+                            "        {",
+                            "            \"role\": \"user\",",
+                            "            \"content\": [",
+                            "                {\"type\": \"text\", \"text\": \"What's in this image?\"},",
+                            "                {",
+                            "                    \"type\": \"image_url\",",
+                            "                    \"image_url\": {",
+                            "                        \"url\": \"https://example.com/image.jpg\"",
+                            "                    }",
+                            "                }",
+                            "            ]",
+                            "        }",
+                            "    ],",
+                            "    max_tokens=300",
+                            ")"
+                        ]
+                    }
+                },
+                "embeddings": {
+                    "description": "向量嵌入功能 | Embeddings Function",
+                    "code_example": {
+                        "usage": [
+                            "client.embeddings.create(",
+                            "    model=\"text-embedding-ada-002\",",
+                            "    input=\"The food was delicious and the waiter...\",",
+                            "    encoding_format=\"float\"",
+                            ")"
+                        ]
+                    }
+                },
+                "image_generation": {
+                    "description": "图片生成功能 | Image Generation Function",
+                    "code_example": {
+                        "usage": [
+                            "client.images.generate(",
+                            "    model=\"dall-e-3\",",
+                            "    prompt=\"A cute baby sea otter\",",
+                            "    n=1,",
+                            "    size=\"1024x1024\"",
+                            ")"
+                        ]
+                    }
+                },
+                "audio": {
+                    "description": "音频功能 | Audio Function",
+                    "code_example": {
+                        "imports": [
+                            "from pathlib import Path",
+                            "import warnings"
+                        ],
+                        "setup": [
+                            "warnings.filterwarnings(\"ignore\", category=DeprecationWarning)",
+                            "speech_file_path = Path(__file__).parent / \"speech.mp3\""
+                        ],
+                        "usage": [
+                            "response = client.audio.speech.create(",
+                            "    model=\"tts-1\",",
+                            "    voice=\"alloy\",",
+                            "    input=\"The quick brown fox jumped over the lazy dog.\"",
+                            ")",
+                            "response.stream_to_file(speech_file_path)"
+                        ]
+                    }
+                }
+            }
+        },
+        "requests": {
+            "description": "HTTP请求库 | HTTP Request Library",
+            "installation": "pip install requests",
+            "features": {
+                "chat": {
+                    "description": "聊天功能 | Chat Function",
+                    "code_example": {
+                        "imports": [
+                            "import requests",
+                            "import json"
+                        ],
+                        "setup": [
+                            "url = \"https://api.nuwaapi.com/v1/chat/completions\"",
+                            "headers = {",
+                            "    \"Content-Type\": \"application/json\",",
+                            "    \"Authorization\": \"Bearer sk-xxx\"  # Replace with your key",
+                            "}"
+                        ],
+                        "usage": [
+                            "payload = {",
+                            "    \"messages\": [",
+                            "        {\"role\": \"system\", \"content\": \"你是一个大语言模型机器人\"},",
+                            "        {\"role\": \"user\", \"content\": \"你好\"}",
+                            "    ],",
+                            "    \"stream\": False,",
+                            "    \"model\": \"gpt-3.5-turbo\",",
+                            "    \"temperature\": 0.5",
+                            "}",
+                            "response = requests.request(\"POST\", url, headers=headers, json=payload)",
+                            "print(response.text)"
+                        ]
+                    }
+                },
+                "chat_with_image": {
+                    "description": "图片识别功能 | Image Recognition Function",
+                    "endpoint": "/v1/chat/completions",
+                    "code_example": {
+                        "payload": [
+                            "{",
+                            "    \"model\": \"gpt-4o\",",
+                            "    \"messages\": [{",
+                            "        \"role\": \"user\",",
+                            "        \"content\": [",
+                            "            {\"type\": \"text\", \"text\": \"这是什么\"},",
+                            "            {",
+                            "                \"type\": \"image_url\",",
+                            "                \"image_url\": {",
+                            "                    \"url\": \"https://example.com/image.jpg\"",
+                            "                }",
+                            "            }",
+                            "        ]",
+                            "    }]",
+                            "}"
+                        ]
+                    }
+                },
+                "embeddings": {
+                    "description": "向量嵌入功能 | Embeddings Function",
+                    "endpoint": "/v1/embeddings",
+                    "code_example": {
+                        "payload": [
+                            "{",
+                            "    \"input\": \"The food was delicious and the waiter...\",",
+                            "    \"model\": \"text-embedding-ada-002\",",
+                            "    \"encoding_format\": \"float\"",
+                            "}"
+                        ]
+                    }
+                },
+                "image_generation": {
+                    "description": "图片生成功能 | Image Generation Function",
+                    "endpoint": "/v1/images/generations",
+                    "code_example": {
+                        "payload": [
+                            "{",
+                            "    \"model\": \"dall-e-3\",",
+                            "    \"prompt\": \"A cute baby sea otter\",",
+                            "    \"n\": 1,",
+                            "    \"size\": \"1024x1024\"",
+                            "}"
+                        ]
+                    }
+                },
+                "audio": {
+                    "description": "音频功能 | Audio Function",
+                    "endpoint": "/v1/audio/speech",
+                    "code_example": {
+                        "payload": [
+                            "{",
+                            "    \"model\": \"tts-1\",",
+                            "    \"input\": \"The quick brown fox jumped over the lazy dog.\",",
+                            "    \"voice\": \"alloy\"",
+                            "}"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+} 

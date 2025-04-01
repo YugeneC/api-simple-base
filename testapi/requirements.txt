@@ -1,0 +1,17 @@
+# 核心依赖 | Core dependencies
+openai>=1.0.0  # OpenAI API客户端 | OpenAI API client
+requests>=2.31.0  # HTTP请求库 | HTTP request library
+
+# 类型提示支持 | Type hinting support
+typing-extensions>=4.5.0  # 类型提示扩展 | Type hinting extensions
+
+# HTTP/网络相关 | HTTP/Network related
+urllib3>=2.0.0  # HTTP客户端库 | HTTP client library
+certifi>=2023.7.22  # SSL/TLS证书 | SSL/TLS certificates
+charset-normalizer>=3.2.0  # 字符编码检测 | Character encoding detection
+
+# JSON处理 | JSON processing
+json5>=0.9.14  # JSON解析器 | JSON parser
+
+# 开发工具 | Development tools
+python-dotenv>=1.0.0  # 环境变量管理 | Environment variable management 
